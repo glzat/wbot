@@ -23,8 +23,8 @@ def answer(text):
         print(f"现在是 {time}")
     elif "搜索" in text:
         try:
-            c = input("""1.百度
-      2.Bing
+            c = input("""1. 百度
+      2. 必应
       请输入你要使用的搜索引擎：""")
             w = input("      请输入你要查询的内容：")
         except KeyboardInterrupt:
