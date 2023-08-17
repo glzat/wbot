@@ -10,7 +10,7 @@ def answer(text):
         print(choice(["你好啊，主人！", "嗨，主人！"]))
     elif "你是谁" in text or "名字" in text:
         print("我是wbot，你的小助手")
-    elif "你会" in text:
+    elif "你会" in text or "你可以" in text or "做" in text:
         print("我可以帮你查询时间、查询日期、搜索内容等等，具体可以查看我的源代码")
     elif "日期" in text or "几月几日" in text or "几月几号" in text:
         now = datetime.now()
