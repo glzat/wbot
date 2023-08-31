@@ -21,6 +21,9 @@ def answer(text):
     elif "时间" in text or "几点" in text:
         time = datetime.now().strftime("%H:%M:%S")
         print(f"现在是 {time}")
+    elif "github" in text and "搜索" in text:
+        w = input("请输入你要在 GitHub 上搜索的内容：")
+        openwp(f"https://github.com/search?q={w}")
     elif "搜索" in text:
         try:
             c = input("""1. 百度
@@ -53,7 +56,7 @@ def answer(text):
 print("欢迎使用 wbot 智能机器人！")
 while True:
     try:
-        text = input("你：")
+        text = input("你：").lower()
     except KeyboardInterrupt:
         print()
         s = choice(["下次再见！", "期待下次见面！"])
