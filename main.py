@@ -1,3 +1,4 @@
+import json
 from datetime import datetime
 from random import choice
 from time import sleep
@@ -12,6 +13,17 @@ def answer(text):
         print("我是wbot，你的小助手")
     elif "你会" in text or "你可以" in text or "做" in text:
         print("我可以帮你查询时间、查询日期、搜索内容等等，具体可以查看我的源代码")
+    elif "你知道" in text or "什么是" in text or "是什么" in text:
+        file_path = __file__ + "\\..\\knowledge.json"
+        with open(file_path, encoding="utf-8") as f:
+            ls = json.load(f)
+            have_answer = False
+            for d in ls:
+                if d["question"].lower() in text:
+                    print(d["answer"])
+                    have_answer = True
+            if not have_answer:
+                print("我暂时还不知道呢，你可以在 GitHub 上提交 PR，为我贡献知识哦！")
     elif "日期" in text or "几月几日" in text or "几月几号" in text:
         now = datetime.now()
         date = now.strftime("%Y年%m月%d日")
