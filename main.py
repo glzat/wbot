@@ -1,4 +1,4 @@
-import json
+from json import load
 from datetime import datetime
 from random import choice
 from time import sleep
@@ -16,7 +16,7 @@ def answer(text):
     elif "你知道" in text or "什么是" in text or "是什么" in text:
         file_path = __file__ + "\\..\\knowledge.json"
         with open(file_path, encoding="utf-8") as f:
-            ls = json.load(f)
+            ls = load(f)
             have_answer = False
             for d in ls:
                 if d["question"].lower() in text:
