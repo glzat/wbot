@@ -5,6 +5,15 @@ from time import sleep
 from webbrowser import open as openwp
 
 
+def find_answer(file_path, question):
+    with open(file_path, encoding="utf-8") as f:
+        ls = load(f)
+        for d in ls:
+            if d["question"].lower() in text:
+                return d["answer"]
+    return "我暂时还不知道呢，你可以在 GitHub 上为我贡献知识哦！"
+
+
 def answer(text):
     print("wbot：", end="")
     if "你好" in text:
@@ -15,23 +24,15 @@ def answer(text):
         print("我可以帮你查询时间、查询日期、搜索内容等等，具体可以查看我的源代码")
     elif "你知道" in text or "什么是" in text or "是什么" in text:
         file_path = __file__ + "\\..\\knowledge.json"
-        with open(file_path, encoding="utf-8") as f:
-            ls = load(f)
-            have_answer = False
-            for d in ls:
-                if d["question"].lower() in text:
-                    print(d["answer"])
-                    have_answer = True
-            if not have_answer:
-                print("我暂时还不知道呢，你可以在 GitHub 上提交 PR，为我贡献知识哦！")
+        print(find_answer(file_path, text))
     elif "日期" in text or "几月几日" in text or "几月几号" in text:
         now = datetime.now()
-        date = now.strftime("%Y年%m月%d日")
+        date = now.strftime(r"%Y年%m月%d日")
         weekday = now.weekday()
         ls = ["一", "二", "三", "四", "五", "六", "日"]
         print(f"今天是 {date}，星期{ls[weekday]}")
     elif "时间" in text or "几点" in text:
-        time = datetime.now().strftime("%H:%M:%S")
+        time = datetime.now().strftime(r"%H:%M:%S")
         print(f"现在是 {time}")
     elif "github" in text and "搜索" in text:
         w = input("请输入你要在 GitHub 上搜索的内容：")
@@ -65,7 +66,7 @@ def answer(text):
         print("我暂时还不会呢")
 
 
-print("欢迎使用 wbot 智能机器人！")
+print("欢迎使用 wbot 智能聊天机器人！")
 while True:
     try:
         text = input("你：").lower()
