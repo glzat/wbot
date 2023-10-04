@@ -50,5 +50,17 @@
     {
         "question": "OpenAI",
         "answer": "OpenAI 是一家位于美国的公司，成立于 2015年12月11日"
+    },
+    {
+        "question": "微信",
+        "answer": "微信是由腾讯公司于 2011年1月21日 推出的一款免费通讯软件"
+    },
+    {
+        "question": "QQ",
+        "answer": "QQ 是由腾讯公司于 1999年2月10日 推出的一款免费通讯软件"
+    },
+    {
+        "question": "Linux",
+        "answer": "Linux 是一个类 UNIX 操作系统，由林纳斯·托瓦兹在 1991年10月5日 发布"
     }
 ]
