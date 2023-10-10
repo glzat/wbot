@@ -9,7 +9,7 @@ def find_answer(file_path, question):
     with open(file_path, encoding="utf-8") as f:
         ls = load(f)
         for d in ls:
-            if d["question"].lower() in text:
+            if d["question"].lower() in question:
                 return d["answer"]
     return "我暂时还不知道呢，你可以在 GitHub 上为我贡献知识哦！"
 
