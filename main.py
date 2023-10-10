@@ -58,7 +58,7 @@ def answer(text):
             sleep(1)
     elif "谢谢" in text or "谢谢了" in text:
         print("不用谢，主人！")
-    elif "再见" in text or "拜拜" in text:
+    elif "再见" in text or "拜拜" in text or "退出" in text:
         print(choice(["下次再见！", "期待下次见面！"]))
         sleep(1)
         exit()
