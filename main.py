@@ -4,6 +4,7 @@ from random import choice
 from time import sleep
 from webbrowser import open as openwp
 
+knowledge_file = __file__ + "\\..\\knowledge.json"
 old_print = print
 
 
@@ -33,12 +34,10 @@ def answer(text):
     elif "你会" in text or "你可以" in text or "做" in text:
         print("我可以帮你查询时间、查询日期、搜索内容等等，具体可以查看我的源代码")
     elif "你知道" in text or "什么是" in text or "是什么" in text:
-        file_path = __file__ + "\\..\\knowledge.json"
-        print(find_answer(file_path, text))
+        print(find_answer(knowledge_file, text))
     elif "日期" in text or "几月几日" in text or "几月几号" in text:
-        now = datetime.now()
-        date = now.strftime(r"%Y年%m月%d日")
-        weekday = now.weekday()
+        date = datetime.now().strftime(r"%Y年%m月%d日")
+        weekday = datetime.now().weekday()
         ls = ["一", "二", "三", "四", "五", "六", "日"]
         print(f"今天是{date}，星期{ls[weekday]}")
     elif "时间" in text or "几点" in text:
