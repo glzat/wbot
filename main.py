@@ -4,6 +4,16 @@ from random import choice
 from time import sleep
 from webbrowser import open as openwp
 
+old_print = print
+
+
+def print(*args):
+    for i in args:
+        for j in i:
+            old_print(j, flush=True, end="")
+            sleep(0.05)
+    old_print()
+
 
 def find_answer(file_path, question):
     with open(file_path, encoding="utf-8") as f:
@@ -15,7 +25,7 @@ def find_answer(file_path, question):
 
 
 def answer(text):
-    print("wbot：", end="")
+    old_print("wbot：", end="")
     if "你好" in text:
         print(choice(["你好啊，主人！", "嗨，主人！"]))
     elif "你是谁" in text or "名字" in text:
@@ -30,13 +40,13 @@ def answer(text):
         date = now.strftime(r"%Y年%m月%d日")
         weekday = now.weekday()
         ls = ["一", "二", "三", "四", "五", "六", "日"]
-        print(f"今天是 {date}，星期{ls[weekday]}")
+        print(f"今天是{date}，星期{ls[weekday]}")
     elif "时间" in text or "几点" in text:
-        time = datetime.now().strftime(r"%H:%M:%S")
-        print(f"现在是 {time}")
+        time = datetime.now().strftime(r"%H时%M分%S秒")
+        print(f"现在是{time}")
     elif "github" in text and "搜索" in text:
         w = input("请输入你要在 GitHub 上搜索的内容：")
-        openwp(f"https://github.com/search?q={w}")
+        openwp(f"https: //github.com/search?q={w}")
     elif "搜索" in text:
         try:
             c = input("""1. 百度
@@ -50,23 +60,23 @@ def answer(text):
             sleep(1)
             exit()
         if c == "1":
-            openwp(f"https://www.baidu.com/s?wd={w}")
+            openwp(f"https: //www.baidu.com/s?wd={w}")
         elif c == "2":
-            openwp(f"https://cn.bing.com/search?q={w}")
+            openwp(f"https: //cn.bing.com/search?q={w}")
         else:
             print("输入错误！")
             sleep(1)
-    elif "谢谢" in text or "谢谢了" in text:
+    elif "谢谢" in text or "感谢" in text:
         print("不用谢，主人！")
     elif "再见" in text or "拜拜" in text or "退出" in text:
         print(choice(["下次再见！", "期待下次见面！"]))
-        sleep(1)
+        sleep(0.5)
         exit()
     else:
         print("我暂时还不会呢")
 
 
-print("欢迎使用 wbot 智能聊天机器人！")
+old_print("欢迎使用 wbot 智能聊天机器人！")
 while True:
     try:
         text = input("你：").lower()
