@@ -45,7 +45,7 @@ def answer(text):
         print(f"现在是{time}")
     elif "github" in text and "搜索" in text:
         w = input("请输入你要在 GitHub 上搜索的内容：")
-        openwp(f"https: //github.com/search?q={w}")
+        openwp(f"https://github.com/search?q={w}")
     elif "搜索" in text:
         try:
             c = input("""1. 百度
