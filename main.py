@@ -19,9 +19,9 @@ def print(*args):
 def find_answer(file_path, question):
     with open(file_path, encoding="utf-8") as f:
         ls = load(f)
-        for d in ls:
-            if d["question"].lower() in question:
-                return d["answer"]
+        for data in ls:
+            if data["question"].lower() in question:
+                return data["answer"]
     return "我暂时还不知道呢，你可以在 GitHub 上为我贡献知识哦！"
 
 
@@ -59,9 +59,9 @@ def answer(text):
             sleep(1)
             exit()
         if c == "1":
-            openwp(f"https: //www.baidu.com/s?wd={w}")
+            openwp(f"https://www.baidu.com/s?wd={w}")
         elif c == "2":
-            openwp(f"https: //cn.bing.com/search?q={w}")
+            openwp(f"https://cn.bing.com/search?q={w}")
         else:
             print("输入错误！")
             sleep(1)
