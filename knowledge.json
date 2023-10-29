@@ -70,5 +70,9 @@
     {
         "question": "Windows",
         "answer": "Windows 是微软公司推出的一款操作系统，发布于 1985年11月20日"
+    },
+    {
+        "question": "GitHub",
+        "answer": "GitHub 是全球最大的软件项目托管平台，于 2008年4月10日 正式上线"
     }
 ]
