@@ -24,6 +24,10 @@
         "answer": "SQL 是一种数据库语言。"
     },
     {
+        "question": "HTML",
+        "answer": "HTML 是一种标记语言，用于定义网页的内容"
+    },
+    {
         "question": "微软",
         "answer": "微软公司成立于 1975 年，以研发、制造、授权和提供广泛的电脑软件服务业务为主，总部位于美国华盛顿州雷德蒙德"
     },
@@ -78,5 +82,9 @@
     {
         "question": "SSH",
         "answer": "SSH 是 Secure Shell 的缩写，是一种在不安全网络上用于安全远程登录和其他安全网络服务的协议。"
+    },
+    {
+        "question": "HTTP",
+        "answer": "HTTP 是 Hypertext Transfer Protocol 的缩写，是一种运用广泛的应用层协议。"
     }
 ]
