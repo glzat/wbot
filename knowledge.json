@@ -74,5 +74,9 @@
     {
         "question": "GitHub",
         "answer": "GitHub 是全球最大的软件项目托管平台，于 2008年4月10日 正式上线"
+    },
+    {
+        "question": "SSH",
+        "answer": "SSH 是 Secure Shell 的缩写，是一种在不安全网络上用于安全远程登录和其他安全网络服务的协议。"
     }
 ]
