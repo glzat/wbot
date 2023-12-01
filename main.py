@@ -67,6 +67,9 @@ def answer(text):
             sleep(1)
     elif "谢谢" in text or "感谢" in text:
         print("不用谢，主人！")
+    elif "音乐" in text:
+        m = input("请输入你要搜索的音乐：")
+        openwp(f"http://tool.liumingye.cn/music/#/search/B/song/{m}")
     elif "再见" in text or "拜拜" in text or "退出" in text:
         print(choice(["下次再见！", "期待下次见面！"]))
         sleep(0.5)
