@@ -71,7 +71,8 @@ def answer(text):
         m = input("请输入你要搜索的音乐：")
         openwp(f"http://tool.liumingye.cn/music/#/search/B/song/{m}")
     elif "天气" in text:
-        openwp(f"https://www.baidu.com/s?wd=天气")
+        c = input("请输入你要查询的城市：")
+        openwp(f"https://www.baidu.com/s?wd={c}天气")
     elif "翻译" in text:
         w = input("请输入你要翻译的英文：")
         openwp(f"https://fanyi.baidu.com/translate#en/zh/{w}")
