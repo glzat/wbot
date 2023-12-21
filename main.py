@@ -70,6 +70,11 @@ def answer(text):
     elif "音乐" in text:
         m = input("请输入你要搜索的音乐：")
         openwp(f"http://tool.liumingye.cn/music/#/search/B/song/{m}")
+    elif "天气" in text:
+        openwp(f"https://www.baidu.com/s?wd=天气")
+    elif "翻译" in text:
+        w = input("请输入你要翻译的英文：")
+        openwp(f"https://fanyi.baidu.com/translate#en/zh/{w}")
     elif "再见" in text or "拜拜" in text or "退出" in text:
         print(choice(["下次再见！", "期待下次见面！"]))
         sleep(0.5)
