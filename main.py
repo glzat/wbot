@@ -4,8 +4,17 @@ from random import choice
 from time import sleep
 from webbrowser import open as openwp
 
+try:
+    import openai
+    print("[log] 导入 openai 库成功！")
+except ImportError:
+    print("[error] 导入 openai 库失败，请先安装 openai 库！")
+    sleep(1)
+    exit()
+
 knowledge_file = __file__ + "\\..\\knowledge.json"
 old_print = print
+chatgpt_first_time = True
 
 
 def print(*args):
@@ -22,6 +31,7 @@ def find_answer(file_path, question):
         for data in ls:
             if data["question"].lower() in question:
                 return data["answer"]
+    f.close()
     return "我暂时还不知道呢，你可以在 GitHub 上为我贡献知识哦！"
 
 
@@ -54,6 +64,7 @@ def answer(text):
             w = input("      请输入你要查询的内容：")
         except KeyboardInterrupt:
             print()
+            old_print("[error] 检测到 KeyboardInterrupt，即将退出")
             s = choice(["下次再见！", "期待下次见面！"])
             print(f"wbot：{s}")
             sleep(1)
@@ -76,6 +87,25 @@ def answer(text):
     elif "翻译" in text:
         w = input("请输入你要翻译的英文：")
         openwp(f"https://fanyi.baidu.com/translate#en/zh/{w}")
+    elif "chatgpt" in text:
+        global chatgpt_first_time
+        if chatgpt_first_time:
+            cw = input("请输入您的 OpenAI 服务器地址（官方接口请留空）：")
+            if (cw != ""):
+                openai.api_base = cw
+            openai.api_key = input("      请输入您的 ChatGPT API Key：")
+            chatgpt_first_time = False
+            cq = input("      请输入您要和 ChatGPT 聊天的内容：")
+        else:
+            cq = input("请输入您要和 ChatGPT 聊天的内容：")
+        print("      等待回答中……")
+        completion = openai.ChatCompletion.create(
+            model="gpt-3.5-turbo",
+            messages=[
+                {"role": "user", "content": cq}
+            ]
+        )
+        print(f"      ChatGPT：{completion["choices"][0]["message"]["content"]}")
     elif "再见" in text or "拜拜" in text or "退出" in text:
         print(choice(["下次再见！", "期待下次见面！"]))
         sleep(0.5)
@@ -84,12 +114,14 @@ def answer(text):
         print("我暂时还不会呢")
 
 
+old_print("[log] 进入主程序成功！")
 old_print("欢迎使用 wbot 智能聊天机器人！")
 while True:
     try:
         text = input("你：").lower()
     except KeyboardInterrupt:
         print()
+        old_print("[error] 检测到 KeyboardInterrupt，即将退出")
         s = choice(["下次再见！", "期待下次见面！"])
         print(f"wbot：{s}")
         sleep(1)
