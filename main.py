@@ -9,7 +9,7 @@ try:
     print("[log] 导入 openai 库成功！")
 except ImportError:
     print("[error] 导入 openai 库失败，请先安装 openai 库！")
-    sleep(1)
+    sleep(0.5)
     exit()
 
 knowledge_file = __file__ + "\\..\\knowledge.json"
@@ -31,7 +31,6 @@ def find_answer(file_path, question):
         for data in ls:
             if data["question"].lower() in question:
                 return data["answer"]
-    f.close()
     return "我暂时还不知道呢，你可以在 GitHub 上为我贡献知识哦！"
 
 
@@ -67,7 +66,7 @@ def answer(text):
             old_print("[error] 检测到 KeyboardInterrupt，即将退出")
             s = choice(["下次再见！", "期待下次见面！"])
             print(f"wbot：{s}")
-            sleep(1)
+            sleep(0.5)
             exit()
         if c == "1":
             openwp(f"https://www.baidu.com/s?wd={w}")
@@ -75,7 +74,7 @@ def answer(text):
             openwp(f"https://cn.bing.com/search?q={w}")
         else:
             print("输入错误！")
-            sleep(1)
+            sleep(0.5)
     elif "谢谢" in text or "感谢" in text:
         print("不用谢，主人！")
     elif "音乐" in text:
@@ -99,12 +98,16 @@ def answer(text):
         else:
             cq = input("请输入您要和 ChatGPT 聊天的内容：")
         print("      等待回答中……")
-        completion = openai.ChatCompletion.create(
-            model="gpt-3.5-turbo",
-            messages=[
-                {"role": "user", "content": cq}
-            ]
-        )
+        try:
+            completion = openai.ChatCompletion.create(
+                model="gpt-3.5-turbo",
+                messages=[
+                    {"role": "user", "content": cq}
+                ]
+            )
+        except Exception:
+            print("      [error] 发送请求时发生错误！")
+            sleep(0.5)
         print(f"      ChatGPT：{completion["choices"][0]["message"]["content"]}")
     elif "再见" in text or "拜拜" in text or "退出" in text:
         print(choice(["下次再见！", "期待下次见面！"]))
@@ -124,6 +127,6 @@ while True:
         old_print("[error] 检测到 KeyboardInterrupt，即将退出")
         s = choice(["下次再见！", "期待下次见面！"])
         print(f"wbot：{s}")
-        sleep(1)
+        sleep(0.5)
         exit()
     answer(text)
