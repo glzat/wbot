@@ -31,7 +31,7 @@ def find_answer(file_path, question):
         for data in ls:
             if data["question"].lower() in question:
                 return data["answer"]
-    return "我暂时还不知道呢，你可以在 GitHub 上为我贡献知识哦！"
+    return "我暂时还不知道呢，你可以在 GitHub 上为我贡献代码哦！"
 
 
 def answer(text):
@@ -114,11 +114,11 @@ def answer(text):
         sleep(0.5)
         exit()
     else:
-        print("我暂时还不会呢")
+        print("我暂时还不会呢，，你可以在 GitHub 上为我贡献代码哦！")
 
 
 old_print("[log] 进入主程序成功！")
-old_print("欢迎使用 wbot 智能聊天机器人！")
+old_print("   |=====欢迎使用 wbot 智能聊天机器人！=====|   ")
 while True:
     try:
         text = input("你：").lower()
