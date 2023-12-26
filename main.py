@@ -6,9 +6,9 @@ from webbrowser import open as openwp
 
 try:
     import openai
-    print("[log] 导入 openai 库成功！")
+    print("\033[1;30;46m[log] 导入 openai 库成功！\033[0m")
 except ImportError:
-    print("[error] 导入 openai 库失败，请先安装 openai 库！")
+    print("\033[1;30;41m[error] 导入 openai 库失败，请先安装 openai 库！\033[0m")
     sleep(0.5)
     exit()
 
@@ -106,7 +106,7 @@ def answer(text):
                 ]
             )
         except Exception:
-            print("      [error] 发送请求时发生错误！")
+            print("      \033[1;30;41m[error] 发送请求时发生错误！\033[0m")
             sleep(0.5)
         print(f"      ChatGPT：{completion["choices"][0]["message"]["content"]}")
     elif "再见" in text or "拜拜" in text or "退出" in text:
@@ -117,14 +117,14 @@ def answer(text):
         print("我暂时还不会呢，，你可以在 GitHub 上为我贡献代码哦！")
 
 
-old_print("[log] 进入主程序成功！")
+old_print("\033[1;30;46m[log] 进入主程序成功！\033[0m")
 old_print("   |=====欢迎使用 wbot 智能聊天机器人！=====|   ")
 while True:
     try:
         text = input("你：").lower()
     except KeyboardInterrupt:
         print()
-        old_print("[error] 检测到 KeyboardInterrupt，即将退出")
+        old_print("\033[1;30;41m[error] 检测到 KeyboardInterrupt，即将退出\033[0m")
         s = choice(["下次再见！", "期待下次见面！"])
         print(f"wbot：{s}")
         sleep(0.5)
