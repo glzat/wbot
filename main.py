@@ -4,25 +4,32 @@ from random import choice
 from time import sleep
 from webbrowser import open as openwp
 
-try:
-    import openai
-    print("\033[1;30;46m[log] 导入 openai 库成功！\033[0m")
-except ImportError:
-    print("\033[1;30;41m[error] 导入 openai 库失败，请先安装 openai 库！\033[0m")
-    sleep(0.5)
-    exit()
-
-knowledge_file = __file__ + "\\..\\knowledge.json"
 old_print = print
-chatgpt_first_time = True
-
-
 def print(*args):
     for i in args:
         for j in i:
             old_print(j, flush=True, end="")
             sleep(0.05)
     old_print()
+
+
+def print_error(string):
+    old_print(f"\033[1;30;41m[error] {string}\033[0m")
+def print_log(string):
+    old_print(f"\033[1;30;46m[log] {string}\033[0m")
+
+
+try:
+    import openai
+    print_log("导入 openai 库成功！")
+except ImportError:
+    print_error("导入 openai 库失败，请先安装 openai 库！")
+    sleep(0.5)
+    exit()
+
+
+knowledge_file = __file__ + "\\..\\knowledge.json"
+chatgpt_first_time = True
 
 
 def find_answer(file_path, question):
@@ -106,9 +113,11 @@ def answer(text):
                 ]
             )
         except Exception:
-            print("      \033[1;30;41m[error] 发送请求时发生错误！\033[0m")
+            old_print("      ")
+            print_error("发送请求时发生错误！")
             sleep(0.5)
-        print(f"      ChatGPT：{completion["choices"][0]["message"]["content"]}")
+        print(f"      ChatGPT：{
+              completion["choices"][0]["message"]["content"]}")
     elif "再见" in text or "拜拜" in text or "退出" in text:
         print(choice(["下次再见！", "期待下次见面！"]))
         sleep(0.5)
@@ -117,14 +126,14 @@ def answer(text):
         print("我暂时还不会呢，，你可以在 GitHub 上为我贡献代码哦！")
 
 
-old_print("\033[1;30;46m[log] 进入主程序成功！\033[0m")
+print_log("进入主程序成功！")
 old_print("   |=====欢迎使用 wbot 智能聊天机器人！=====|   ")
 while True:
     try:
         text = input("你：").lower()
     except KeyboardInterrupt:
         print()
-        old_print("\033[1;30;41m[error] 检测到 KeyboardInterrupt，即将退出\033[0m")
+        print_error("检测到 KeyboardInterrupt，即将退出")
         s = choice(["下次再见！", "期待下次见面！"])
         print(f"wbot：{s}")
         sleep(0.5)
