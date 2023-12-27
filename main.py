@@ -13,12 +13,15 @@ def print(*args):
     old_print()
 
 
+# 输出错误信息
 def print_error(string):
     old_print(f"\033[1;30;41m[error] {string}\033[0m")
+# 输出日志信息
 def print_log(string):
     old_print(f"\033[1;30;46m[log] {string}\033[0m")
 
 
+# 导入 openai 库
 try:
     import openai
     print_log("导入 openai 库成功！")
