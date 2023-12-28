@@ -4,6 +4,7 @@ from random import choice
 from time import sleep
 from webbrowser import open as openwp
 
+# 逐字输出
 old_print = print
 def print(*args):
     for i in args:
@@ -31,6 +32,7 @@ except ImportError:
     exit()
 
 
+# 设置部分变量
 knowledge_file = __file__ + "\\..\\knowledge.json"
 chatgpt_first_time = True
 
