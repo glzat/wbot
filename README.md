@@ -1,5 +1,9 @@
 A simple chatbot in Chinese.
 
+Run `main.py` to try it.
+
+Don't forget to install `openai` using `pip install openai`!
+
 Next step:
 
 1. Developing new function
