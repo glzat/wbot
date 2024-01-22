@@ -17,10 +17,10 @@ def print(*args):
 # 输出错误信息
 def print_error(string):
     old_print(f"\033[1;30;41m[error] {string}\033[0m")
+
 # 输出日志信息
 def print_log(string):
     old_print(f"\033[1;30;46m[log] {string}\033[0m")
-
 
 # 导入 openai 库
 try:
@@ -31,15 +31,18 @@ except ImportError:
     sleep(0.5)
     exit()
 
-
 # 设置部分变量
 knowledge_file = __file__ + "\\..\\knowledge.json"
-with open("api.json","r",encoding="utf-8")as f:#读取配置文件
-      data = json.load(f)
-      chatgpt_first_time = data["chatgpt_first_time"]
-      openai.api_key = data["api"]
-      openai.proxy = data["proxy"]
-print_log("导入配置文件成功！")      
+api_config_file = __file__ + "\\..\\api_config.json"
+
+# 读取配置文件
+with open(api_config_file, "r", encoding="utf-8")as f:
+    data = json.load(f)
+    chatgpt_first_time = data["chatgpt_first_time"]
+    openai.api_key = data["api"]
+    openai.proxy = data["proxy"]
+print_log("导入配置文件成功！")
+
 
 def find_answer(file_path, question):
     with open(file_path, encoding="utf-8") as f:
@@ -48,7 +51,6 @@ def find_answer(file_path, question):
             if data["question"].lower() in question:
                 return data["answer"]
     return "我暂时还不知道呢，你可以在 GitHub 上为我贡献代码哦！"
-
 
 def answer(text):
     old_print("wbot：", end="")
@@ -109,7 +111,7 @@ def answer(text):
             if (cw != ""):
                 openai.api_base = cw
             openai.api_key = input("      请输入您的 ChatGPT API Key：")
-            with open("api.json","r+",encoding="utf-8")as f:
+            with open("api.json", "r+", encoding="utf-8")as f:
                 data = json.load(f)
                 data["api"] = openai.api_key
                 data["chatgpt_first_time"] = False
@@ -134,15 +136,14 @@ def answer(text):
             old_print("      ")
             print_error("发送请求时发生错误！")
             sleep(0.5)
-        #print(f"      ChatGPT：{
-            #completion["choices"][0]["message"]["content"]}")
+        # print(f"      ChatGPT：{
+            # completion["choices"][0]["message"]["content"]}")
     elif "再见" in text or "拜拜" in text or "退出" in text:
         print(choice(["下次再见！", "期待下次见面！"]))
         sleep(0.5)
         exit()
     else:
         print("我暂时还不会呢，，你可以在 GitHub 上为我贡献代码哦！")
-
 
 print_log("进入主程序成功！")
 old_print("   |=====欢迎使用 wbot 智能聊天机器人！=====|   ")
